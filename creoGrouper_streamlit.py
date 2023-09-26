@@ -18,6 +18,8 @@ def process_file(uploaded_file):
     cols = ['Spend', 'Installs', 'IPM',
         'eROAS D365 Forecast', 'RR D7 To-Date']
     for col in cols:
+        if col not in df.columns:
+            df[col] = 0
         df[col] = pd.to_numeric(df[col])
     df = df.round(1)
     df['Base Creative Name'] = df['Creative (UA)'].str.extract(r'(^.*?)(?=_\d+x\d+_\d+s)')[0]
